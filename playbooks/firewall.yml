@@ -9,16 +9,13 @@
           permanent: yes
           state: enabled
         loop:
-          - 22/tcp
           - 7000/tcp
           - 7001/tcp
           - 7199/tcp
           - 9042/tcp
           - 9160/tcp
           - 9142/tcp
-      - name: reload firewall-cmd
-        command: firewall-cmd --reload
       - name: restart Firewall
         service:
           name: firewalld
-          state: restarted
+          state: reloaded

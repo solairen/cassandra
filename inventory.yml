@@ -2,12 +2,9 @@ all:
   children:
       linux:
         vars:
-          ansible_user: root
-          ansible_ssh_pass: Xs4ep0!
+          ansible_user: username
+          ansible_ssh_pass: password
         children:
           cassandra:
             hosts:
-              #172.104.149.233:
-              172.105.93.108:
-              45.79.251.194:
-              45.79.251.202:
+              127.0.0.1:

@@ -9,11 +9,21 @@
         src: ../utils/cassandra.yml.j2
         dest: /etc/cassandra/default.conf/cassandra.yaml
         mode: '0644'
-    - name: udpate cassandra-env
-      shell: |
-        sed -i -r 's/JMX_PORT="7199"/JMX_PORT="{{ _JMX_PORT }}"/' /etc/cassandra/default.conf/cassandra-env.sh
-        sed -i -r 's/#MX4J_ADDRESS="-Dmx4jaddress=127.0.0.1"/MX4J_ADDRESS="-Dmx4jaddress={{ _DMX_ADDRESS }}"/' /etc/cassandra/default.conf/cassandra-env.sh
-        sed -i -r 's/#MX4J_PORT="-Dmx4jport=8081"/MX4J_PORT="-Dmx4jport={{ _DMX_PORT }}"/' /etc/cassandra/default.conf/cassandra-env.sh
+    - name: update JMX_PORT
+      lineinfile:
+        path: /etc/cassandra/default.conf/cassandra-env.sh
+        regexp: '^JMX_PORT='
+        line: JMX_PORT="{{ _JMX_PORT }}"
+    - name: update MX4J_ADDRESS
+      lineinfile:
+        path: /etc/cassandra/default.conf/cassandra-env.sh
+        regexp: '^#MX4J_ADDRESS='
+        line: MX4J_ADDRESS="-Dmx4jaddress={{ _DMX_ADDRESS }}"
+    - name: update MX4J_PORT
+      lineinfile:
+        path: /etc/cassandra/default.conf/cassandra-env.sh
+        regexp: '^#MX4J_PORT='
+        line: MX4J_PORT="-Dmx4jport={{ _DMX_PORT }}"
     - name: update cassandra
       shell: |
         sed -i '72i s/^/#/' /etc/rc.d/init.d/cassandra

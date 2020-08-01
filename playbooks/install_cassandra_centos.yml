@@ -13,4 +13,5 @@
     - name: install Cassandra on CentOS
       yum:
         name: cassandra
+        update_cache: yes
         state: latest
