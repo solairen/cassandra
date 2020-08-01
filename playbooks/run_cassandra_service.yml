@@ -1,0 +1,34 @@
+---
+- hosts: cassandra
+  become: yes
+  tasks:
+    - name: create Cassandra service on CentOS 8
+      shell: |
+        echo "[Unit]
+        Description=Apache Cassandra
+        After=network.target
+
+        [Service]
+        PIDFile=/var/run/cassandra/cassandra.pid
+        User=cassandra
+        Group=cassandra
+        ExecStart=/usr/sbin/cassandra -f -p /var/run/cassandra/cassandra.pid
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target" > /etc/systemd/system/cassandra.service
+      when: ansible_distribution == 'CentOS' and ansible_distribution_version >= '8.1'
+    - name: reload daemon
+      systemd:
+        daemon_reload: yes
+    #- name: start Cassandra service
+    #  systemd:
+    #    name: cassandra
+    #    enabled: yes
+    #    state: restarted
+    #1 => Serwis nie wstaje na CentOS 7. Sprawdzić czy to poniżej pomoże.
+    - name: start Cassandra service
+      service:
+        name: cassandra
+        enabled: yes
+        state: restarted

@@ -3,8 +3,11 @@ all:
       linux:
         vars:
           ansible_user: root
-          ansible_ssh_pass: vagrant
+          ansible_ssh_pass: Xs4ep0!
         children:
           cassandra:
             hosts:
-              127.0.0.1:
+              #172.104.149.233:
+              172.105.93.108:
+              45.79.251.194:
+              45.79.251.202:

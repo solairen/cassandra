@@ -1,21 +1,10 @@
 ---
 - hosts: cassandra
   become: yes
-  gather_facts: no
   vars_files:
     - ../config.vars
   tasks:
-    - name: add Cassandra repo
-      shell: |
-        echo "[cassandra]
-        name=Apache Cassandra
-        baseurl=https://www.apache.org/dist/cassandra/redhat/311x/
-        gpgcheck=1
-        repo_gpgcheck=1
-        gpgkey=https://www.apache.org/dist/cassandra/KEYS" > /etc/yum.repos.d/webmin.repo
-    - name: install Cassandra
-      command: yum -y install cassandra 
-    - name: copy configuration
+    - name: copy Cassandra template configuration to host
       template:
         src: ../utils/cassandra.yml.j2
         dest: /etc/cassandra/default.conf/cassandra.yaml
@@ -35,9 +24,3 @@
         src: ../utils/mx4j-tools.jar
         dest: /usr/share/cassandra/lib/
         force: yes
-    - name: enable Cassandra service
-      command: systemctl enable cassandra
-    - name: start Cassandra service
-      service:
-        name: cassandra
-        state: restarted

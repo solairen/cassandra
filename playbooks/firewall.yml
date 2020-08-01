@@ -1,44 +1,21 @@
 ---
   - hosts: cassandra
-    gather_facts: no
     become: yes
     tasks:
-      - name: add 22 port to internal firewall rule
-        firewalld:
-          zone: internal
-          port: 22/tcp
-          permanent: yes
-          state: enabled
-      - name: add 9160 port to internal firewall rule
-        firewalld:
-          zone: internal
-          port: 9160/tcp
-          permanent: yes
-          state: enabled
-      - name: add 7000 port to public firewall rule
-        firewalld:
-          zone: public
-          port: 7000/tcp
-          permanent: yes
-          state: enabled
-      - name: add 8090 port to public firewall rule
-        firewalld:
-          zone: public
-          port: 8090/tcp
-          permanent: yes
-          state: enabled
-      - name: add 8091 port to public firewall rule
-        firewalld:
-          zone: public
-          port: 8091/tcp
-          permanent: yes
-          state: enabled
-      - name: add 9160 port to public firewall rule
+      - name: add cassandra ports to firewall rule
         firewalld:
           zone: public
           port: 9160/tcp
           permanent: yes
           state: enabled
+        loop:
+          - 22/tcp
+          - 7000/tcp
+          - 7001/tcp
+          - 7199/tcp
+          - 9042/tcp
+          - 9160/tcp
+          - 9142/tcp
       - name: reload firewall-cmd
         command: firewall-cmd --reload
       - name: restart Firewall
