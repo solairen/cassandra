@@ -1,0 +1,25 @@
+---
+- hosts: cassandra
+  become: yes
+  tasks:
+    - name: create Cassandra service on CentOS
+      shell: |
+        echo "[Unit]
+        Description=Apache Cassandra
+        After=network.target
+
+        [Service]
+        PIDFile=/var/run/cassandra/cassandra.pid
+        User=cassandra
+        Group=cassandra
+        ExecStart=/usr/sbin/cassandra -f -p /var/run/cassandra/cassandra.pid
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target" > /etc/systemd/system/cassandra.service
+    - name: start Cassandra service
+      systemd:
+        name: cassandra
+        daemon_reload: yes
+        enabled: yes
+        state: restarted

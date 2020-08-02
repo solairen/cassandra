@@ -1,10 +1,14 @@
 ### Precondition
 
-(Virtual)Machine with CentOS system installed.
+(Virtual-)Machine with CentOS/Debian/Ubuntu system installed.
 
 ### About cassandra_ansible
 
-This ansible scirpts will install java and cassandra on centos machine.<br/>
+This ansible scirpts will install java and cassandra on machines with operating system:
+  * Centos 7/8
+  * Ubuntu 18.04/20.04
+  * Debian 9/10<br/>
+
 If more than one IP addresses will be provider, it will combine all cassandra's into ring.<br/>
 On the last step, this script will open all necessary firewall ports.
 
@@ -30,9 +34,9 @@ _JMX_PORT: 8090
 _DMX_ADDRESS: 0.0.0.0
 _DMX_PORT: 8091
 ```
-In ***inventory.yml*** add IP address(es) to (virtual)machines
+In ***inventory.yml*** add IP address(es) to (virtual-)machines
 
-> to install on one (virtual)machine
+> to install on one (virtual-)machine
 ```yaml
 all:
   children:
@@ -46,7 +50,7 @@ all:
               127.0.0.1:
 ```
 
-> to install on two and more (virtual)machines
+> to install on two and more (virtual-)machines
 ```yaml
 all:
   children:
@@ -63,9 +67,9 @@ all:
 ```
 
 * vars:<br/>
-    * ansible_user: root (to bypass the permission problem)<br/>
-    * ansible_password: enter password for root user
+    * ansible_user: enter username<br/>
+    * ansible_password: enter password
 
 #### To start cassandra_ansible
 
-From CMD type: `ansible-playbook -i inventory install.yml`
+From CMD type: ansible-playbook -i inventory.yml install.yml --ask-become-pass

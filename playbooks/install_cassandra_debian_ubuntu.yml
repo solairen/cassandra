@@ -1,0 +1,28 @@
+---
+- hosts: cassandra
+  become: yes
+  tasks:
+    - name: add Cassandra repo to Debian / Ubuntu
+      shell: /
+        echo "deb https://downloads.apache.org/cassandra/debian 311x main" | tee -a /etc/apt/sources.list.d/cassandra.sources.list
+    - name: Add the Apache Cassandra repository keys
+      apt_key:
+        url: https://downloads.apache.org/cassandra/KEYS
+        state: present
+      # spróbować użyć modułu Ansible URI, potem moduł apt_key i dodać klucz
+      #shell: /
+      #  curl https://downloads.apache.org/cassandra/KEYS | apt-key add -
+    - name: Add the public key
+      apt_key:
+        keyserver: pool.sks-keyservers.net
+        id: A278B781FE4B2BDA
+    #- name: Update the repositories
+    #  apt:
+    #    update_cache: yes
+    - name: Install Cassandra on Debian / Ubuntu
+      apt:
+        name: cassandra
+        update_cache: yes
+        state: latest
+
+# NIE INSTALUJE SIĘ 

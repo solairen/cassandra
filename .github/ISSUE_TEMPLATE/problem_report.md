@@ -1,6 +1,6 @@
 ---
 name: Problem report
-about: Create a bug to fix issues
+about: Report errors or unexpected behavior
 title: ''
 labels: problem report
 assignees: ''
@@ -16,7 +16,7 @@ The version of the app that issue has been found
 Chance from 0% to 100% to reproduce the issue
 
 **How to reproduce**
-Steps to reproduce the behavior:
+
     1.
     2.
 

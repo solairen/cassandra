@@ -1,4 +1,9 @@
 ---
 - import_playbook: playbooks/java.yml
-- import_playbook: playbooks/install_cassandra.yml
+- import_playbook: playbooks/install_cassandra_centos.yml
+  when: ansible_distribution == 'CentOS'
+- import_playbook: playbooks/install_cassandra_debian_ubuntu.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 - import_playbook: playbooks/firewall.yml
+- import_playbook: playbooks/post_cassandra_installation.yml
+- import_playbook: playbooks/run_cassandra_service.yml
