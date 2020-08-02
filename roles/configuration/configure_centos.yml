@@ -1,0 +1,30 @@
+- name: copy cassandra template configuration to host
+  template:
+    src: ../utils/cassandra.yml.j2
+    dest: /etc/cassandra/default.conf/cassandra.yaml
+    mode: '0644'
+- name: update jmx_port
+  lineinfile:
+    path: /etc/cassandra/default.conf/cassandra-env.sh
+    regexp: '^JMX_PORT='
+    line: JMX_PORT="{{ _JMX_PORT }}"
+- name: update mx4j_address
+  lineinfile:
+    path: /etc/cassandra/default.conf/cassandra-env.sh
+    regexp: '^#MX4J_ADDRESS='
+    line: MX4J_ADDRESS="-Dmx4jaddress={{ _DMX_ADDRESS }}"
+- name: update mx4j_port
+  lineinfile:
+    path: /etc/cassandra/default.conf/cassandra-env.sh
+    regexp: '^#MX4J_PORT='
+    line: MX4J_PORT="-Dmx4jport={{ _DMX_PORT }}"
+- name: update cassandra
+  shell: |
+    sed -i '72i s/^/#/' /etc/rc.d/init.d/cassandra
+    sed -i '73i   runuser -u $CASSANDRA_OWNR -- $CASSANDRA_PROG -p $pid_file > $log_file 2>&1' /etc/rc.d/init.d/cassandra
+    sed -i '74i   chown root.root $pid_file' /etc/rc.d/init.d/cassandra
+- name: copy mx4j-tools to cassandra
+  copy:
+    src: ../utils/mx4j-tools.jar
+    dest: /usr/share/cassandra/lib/
+    force: yes
