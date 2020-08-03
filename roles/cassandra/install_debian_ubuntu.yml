@@ -1,0 +1,28 @@
+- name: add apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+- name: add cassandra repo
+  apt_repository:
+    repo: deb https://downloads.apache.org/cassandra/debian 311x main
+    state: present
+    filename: cassandra.sources.list
+    update_cache: no
+- name: add cassandra repository keys
+  apt_key:
+    url: https://downloads.apache.org/cassandra/KEYS
+    state: present
+- name: add the public key
+  apt_key:
+    keyserver: pool.sks-keyservers.net
+    id: A278B781FE4B2BDA
+    state: present
+- name: add aptitude
+  apt:
+    name: aptitude
+    state: present
+- name: install cassandra
+  apt:
+    name: cassandra
+    update_cache: yes
+    state: latest

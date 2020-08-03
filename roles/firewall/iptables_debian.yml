@@ -1,0 +1,14 @@
+- name: add cassandra ports to firewall
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "{{ item }}"
+    state: present
+  loop:
+    - "22"
+    - "7000"
+    - "7001"
+    - "7199"
+    - "9042"
+    - "9160"
+    - "9142"

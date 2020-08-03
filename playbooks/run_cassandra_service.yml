@@ -2,6 +2,7 @@
 - hosts: cassandra
   become: yes
   tasks:
+<<<<<<< HEAD
     - name: create Cassandra service on CentOS
       shell: |
         echo "[Unit]
@@ -23,3 +24,7 @@
         daemon_reload: yes
         enabled: yes
         state: restarted
+=======
+    - name: start cassandra service
+      include: ../roles/cassandra/run_service.yml
+>>>>>>> moleszek/#2
