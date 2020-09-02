@@ -1,6 +1,6 @@
 ---
-- import_playbook: playbooks/install_java.yml
-- import_playbook: playbooks/configure_firewall.yml
-- import_playbook: playbooks/install_cassandra.yml
-- import_playbook: playbooks/configure_cassandra.yml
-- import_playbook: playbooks/run_cassandra_service.yml
+- include: playbooks/install_java.yml
+- include: playbooks/configure_firewall.yml
+- include: playbooks/install_cassandra.yml
+- include: playbooks/configure_cassandra.yml
+- include: playbooks/run_cassandra_service.yml

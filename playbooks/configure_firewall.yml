@@ -1,13 +1,5 @@
 ---
-  - hosts: cassandra
-    become: yes
-    tasks:
-      - name: add cassandra ports to firewall
-        include: ../roles/firewall/firewall_centos.yml
-        when: ansible_distribution == 'CentOS'
-      - name: add cassandra ports to firewall
-        include: ../roles/firewall/ufw_debian_ubuntu.yml
-        when: ansible_distribution == 'Ubuntu'
-      - name: add cassandra ports to firewall
-        include: ../roles/firewall/iptables_debian.yml
-        when: ansible_distribution == 'Debian'
+- hosts: cassandra
+  become: yes
+  roles:
+    - role: roles/firewall

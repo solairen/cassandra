@@ -1,0 +1,7 @@
+---
+- include: firewall_centos.yml
+  when: ansible_distribution == 'CentOS'
+- include: iptables_debian.yml
+  when: ansible_distribution == 'Debian'
+- include: ufw_ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'

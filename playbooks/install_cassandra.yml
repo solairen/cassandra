@@ -1,13 +1,5 @@
 ---
 - hosts: cassandra
   become: yes
-  tasks:
-    - name: install cassandra
-      include: ../roles/cassandra/install_centos.yml
-      when: ansible_distribution == 'CentOS'
-    - name: install cassandra
-      include: ../roles/cassandra/install_debian_ubuntu.yml
-      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-    - name: create service
-      include: ../roles/cassandra/create_service_centos.yml
-      when: ansible_distribution == 'CentOS'
+  roles:
+    - role: roles/cassandra

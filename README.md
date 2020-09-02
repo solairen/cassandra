@@ -42,8 +42,8 @@ all:
   children:
       linux:
         vars:
-          ansible_user: root
-          ansible_ssh_pass: vagrant
+          ansible_user: username
+          ansible_ssh_pass: password
         children:
           cassandra:
             hosts:
@@ -56,8 +56,8 @@ all:
   children:
       linux:
         vars:
-          ansible_user: root
-          ansible_ssh_pass: vagrant
+          ansible_user: username
+          ansible_ssh_pass: password
         children:
           cassandra:
             hosts:

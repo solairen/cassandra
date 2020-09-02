@@ -1,6 +1,5 @@
 ---
 - hosts: cassandra
   become: yes
-  tasks:
-    - name: start cassandra service
-      include: ../roles/cassandra/run_service.yml
+  roles:
+    - role: roles/services
