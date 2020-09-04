@@ -1,6 +1,6 @@
 - name: copy cassandra template configuration to host
   template:
-    src: ../utils/cassandra.yml.j2
+    src: files/cassandra.yml.j2
     dest: /etc/cassandra/default.conf/cassandra.yaml
     mode: '0644'
 - name: update jmx_port
@@ -20,6 +20,6 @@
     line: MX4J_PORT="-Dmx4jport={{ _DMX_PORT }}"
 - name: copy mx4j-tools to cassandra
   copy:
-    src: ../utils/mx4j-tools.jar
+    src: files/mx4j-tools.jar
     dest: /usr/share/cassandra/lib/
     force: yes
