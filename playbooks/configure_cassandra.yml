@@ -1,7 +1,5 @@
 ---
 - hosts: cassandra
   become: yes
-  vars_files:
-    - ../config.vars
   roles:
     - role: roles/configuration

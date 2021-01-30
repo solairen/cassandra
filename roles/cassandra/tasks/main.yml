@@ -1,7 +1,2 @@
 ---
-- include_tasks: install_centos.yml
-  when: ansible_distribution == 'CentOS'
-- include_tasks: install_debian_ubuntu.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-- include_tasks: create_service_centos.yml
-  when: ansible_distribution == 'CentOS'
+- include_tasks: install_cassandra.yml

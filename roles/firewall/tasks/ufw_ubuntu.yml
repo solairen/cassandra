@@ -1,14 +1,8 @@
+---
 - name: add cassandra ports to firewall rule
   ufw:
     state: enabled
     rule: allow
     proto: tcp
     port: "{{ item }}"
-  loop:
-    - "22"
-    - "7000"
-    - "7001"
-    - "7199"
-    - "9042"
-    - "9160"
-    - "9142"
+  loop: "{{ ports }}"
