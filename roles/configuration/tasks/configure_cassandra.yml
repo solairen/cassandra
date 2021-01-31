@@ -1,3 +1,4 @@
+---
 - name: copy cassandra template configuration to host
   template:
     src: files/cassandra.yml.j2

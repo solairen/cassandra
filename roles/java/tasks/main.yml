@@ -1,6 +1,4 @@
 ---
-- include: java_centos.yml
-  when: ansible_distribution == 'CentOS'
 - include: java_debian_ubuntu.yml
   when: ansible_distribution == 'Debian' and ansible_distribution_version > '9' or ansible_distribution == 'Ubuntu'
 - include: java_debian10.yml

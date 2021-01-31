@@ -1,0 +1,2 @@
+---
+debian10_packages: [ca-certificates, dirmngr, gnupg, software-properties-common]

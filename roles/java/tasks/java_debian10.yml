@@ -1,12 +1,9 @@
+---
 - name: install required packages
   apt:
     name: "{{ item }}"
     state: present
-  loop:
-    - ca-certificates
-    - dirmngr
-    - gnupg
-    - software-properties-common
+  loop: "{{ debian10_packages }}"
 - name: add java 8 GPG key
   apt_key:
     url: https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public

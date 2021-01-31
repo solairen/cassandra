@@ -1,3 +1,4 @@
+---
 - name: start cassandra service
   systemd:
     name: cassandra

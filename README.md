@@ -1,11 +1,10 @@
 ### Precondition
 
-(Virtual-)Machine with CentOS/Debian/Ubuntu system installed.
+(Virtual-)Machine with Debian/Ubuntu system installed.
 
 ### About cassandra_ansible
 
 This ansible scirpts will install java and cassandra on machines with operating system:
-  * Centos 7/8
   * Ubuntu 18.04/20.04
   * Debian 9/10<br/>
 
@@ -14,7 +13,7 @@ On the last step, this script will open all necessary firewall ports.
 
 ### How to use cassandra_ansible
 
-Open ***config.vars*** and enter desired values
+Open ***group_vars/all/configuration*** and enter desired values:
 
 ```vars
 _CLUSTER_NAME: Test Cluster
@@ -34,7 +33,9 @@ _JMX_PORT: 8090
 _DMX_ADDRESS: 0.0.0.0
 _DMX_PORT: 8091
 ```
-In ***inventory.yml*** add IP address(es) to (virtual-)machines
+In ***inventory.yml*** add IP address(es) to (virtual-)machines.
+If **ssh_key** is used, comment **ssh_pass**.
+If **ssh_pass** is used, comment **ssh_key**.
 
 > to install on one (virtual-)machine
 ```yaml
@@ -44,6 +45,7 @@ all:
         vars:
           ansible_user: username
           ansible_ssh_pass: password
+          ansible_ssh_private_key_file: <path_to_key>
         children:
           cassandra:
             hosts:
@@ -58,6 +60,7 @@ all:
         vars:
           ansible_user: username
           ansible_ssh_pass: password
+          ansible_ssh_private_key_file: <path_to_key>
         children:
           cassandra:
             hosts:
@@ -72,4 +75,4 @@ all:
 
 #### To start cassandra_ansible
 
-From CMD type: ansible-playbook -i inventory.yml install.yml --ask-become-pass
+From CMD type: ansible-playbook -i inventory.yml install.yml --ask-become-pass -vv

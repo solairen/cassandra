@@ -1,3 +1,4 @@
+---
 - name: add apt-transport-https
   apt:
     name: apt-transport-https
@@ -26,3 +27,9 @@
     name: cassandra
     update_cache: yes
     state: latest
+- name: check if cassandra service is running
+  service_facts:
+  retries: 15
+  delay: 3
+  register: services_stat
+  until: "services_stat.ansible_facts.services['cassandra.service']['state'] == 'running'"
