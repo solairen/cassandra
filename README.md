@@ -1,5 +1,5 @@
 ### About
-These ansible scripts will install Java and [cassandra](https://cassandra.apache.org/) on Ubuntu or Debian.</br>
+This ansible script will install Java and [cassandra](https://cassandra.apache.org/) on Ubuntu or Debian.</br>
 If more than one IP address will be provided, it will combine all cassandra's into rings.
 
 ### Supported OS:
