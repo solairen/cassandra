@@ -1,0 +1,23 @@
+name: Ansible Lint
+on:
+  push:
+    branches:
+      - "*"
+jobs:
+  Check_Ansible_Lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check yaml files
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: |
+          playbooks/*.yml
+          roles/cassandra/tasks/*.yml
+          roles/configuration/tasks/*.yml
+          roles/firewall/tasks/*.yml
+          roles/firewall/vars/*.yml
+          roles/java/tasks/*.yml
+          roles/java/vars/*.yml
+          roles/services/tasks/*.yml
+        args: -x no-changed-when
