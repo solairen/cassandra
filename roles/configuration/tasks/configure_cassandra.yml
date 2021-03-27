@@ -3,7 +3,7 @@
   template:
     src: files/cassandra.yml.j2
     dest: /etc/cassandra/cassandra.yaml
-    mode: '0644'
+    mode: 0644
 - name: update jmx_port
   lineinfile:
     path: /etc/cassandra/cassandra-env.sh
@@ -28,4 +28,5 @@
   copy:
     src: files/mx4j-tools.jar
     dest: /usr/share/cassandra/lib/
-    force: yes
+    force: true
+    mode: 0644

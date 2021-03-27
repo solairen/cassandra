@@ -8,7 +8,7 @@
     repo: deb https://downloads.apache.org/cassandra/debian 311x main
     state: present
     filename: cassandra.sources.list
-    update_cache: no
+    update_cache: false
 - name: add cassandra repository keys
   apt_key:
     url: https://downloads.apache.org/cassandra/KEYS
@@ -25,8 +25,8 @@
 - name: install cassandra
   apt:
     name: cassandra
-    update_cache: yes
-    state: latest
+    update_cache: true
+    state: present
 - name: check if cassandra service is running
   service_facts:
   retries: 15

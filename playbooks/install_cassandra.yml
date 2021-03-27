@@ -1,5 +1,5 @@
 ---
 - hosts: cassandra
-  become: yes
+  become: true
   roles:
     - role: roles/cassandra

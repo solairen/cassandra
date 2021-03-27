@@ -13,7 +13,7 @@
     repo: deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ buster main
     state: present
     filename: cassandra.sources.list
-    update_cache: yes
+    update_cache: true
 - name: install java 8
   apt:
     name: adoptopenjdk-8-hotspot
